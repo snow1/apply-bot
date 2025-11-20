@@ -1,0 +1,70 @@
+[
+  {
+    "question": "Do you require sponsorship for employment visa status?",
+    "assumedAnswer": "No",
+    "answer": "No, I do not require sponsorship for employment visa status.",
+    "timestamp": "2025-01-15T10:30:00.000Z"
+  },
+  {
+    "question": "What is your expected salary range?",
+    "assumedAnswer": "$120,000 - $150,000",
+    "answer": "$130,000 - $160,000 annually, negotiable based on total compensation package.",
+    "timestamp": "2025-01-16T14:20:00.000Z"
+  },
+  {
+    "question": "Are you willing to relocate?",
+    "assumedAnswer": "No",
+    "answer": "I am open to relocation for the right opportunity, but prefer remote or hybrid work arrangements.",
+    "timestamp": "2025-01-17T09:15:00.000Z"
+  },
+  {
+    "question": "How many years of experience do you have with React?",
+    "assumedAnswer": "3-5 years",
+    "timestamp": "2025-01-18T11:45:00.000Z"
+  },
+  {
+    "question": "Do you have experience with TypeScript?",
+    "assumedAnswer": "Yes",
+    "timestamp": "2025-01-18T12:00:00.000Z"
+  },
+  {
+    "question": "What is your availability to start?",
+    "assumedAnswer": "2 weeks",
+    "answer": "I can start within 2-3 weeks after receiving an offer, allowing time for proper notice to my current employer.",
+    "timestamp": "2025-01-19T08:30:00.000Z"
+  },
+  {
+    "question": "Are you authorized to work in the United States?",
+    "assumedAnswer": "Yes",
+    "answer": "Yes, I am authorized to work in the United States. I hold a valid work authorization.",
+    "timestamp": "2025-01-19T10:20:00.000Z"
+  },
+  {
+    "question": "Do you have experience with cloud platforms (AWS, Azure, GCP)?",
+    "assumedAnswer": "AWS",
+    "timestamp": "2025-01-20T13:15:00.000Z"
+  },
+  {
+    "question": "What is your proficiency level with Docker and containerization?",
+    "assumedAnswer": "Intermediate",
+    "timestamp": "2025-01-20T14:00:00.000Z"
+  },
+  {
+    "question": "Can you provide professional references?",
+    "assumedAnswer": "Yes",
+    "answer": "Yes, I can provide 2-3 professional references from previous managers and colleagues upon request.",
+    "timestamp": "2025-01-21T09:00:00.000Z"
+  },
+  {
+    "question": "What is your preferred work arrangement?",
+    "assumedAnswer": "Remote",
+    "answer": "I prefer remote work but am flexible with hybrid arrangements (2-3 days in office per week) if required.",
+    "timestamp": "2025-01-21T11:30:00.000Z"
+  },
+  {
+    "question": "Do you have experience with microservices architecture?",
+    "assumedAnswer": "Yes",
+    "timestamp": "2025-01-22T10:00:00.000Z"
+  }
+]
+

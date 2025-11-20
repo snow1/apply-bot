@@ -35,10 +35,12 @@
        "company": "公司名",
        "jobTitle": "岗位名",
        "postedTime": "发布时间（如：19 hours ago）",
-       "applicationTime": "投递时间（ISO 8601 格式，精确到小时分钟秒，如：2025-11-17T00:16:12Z）"
+       "applicationTime": "投递时间（ISO 8601 格式，精确到小时分钟秒，如：2025-11-17T00:16:12Z）",
+       "link": "岗位链接（尽量保留，即使是 Easy Apply 也要记录）"
      }
      ```
    - **重要**：`applicationTime` 必须使用申请完成时的**实际时间戳**，使用 `date -u +"%Y-%m-%dT%H:%M:%SZ"` 获取当前 UTC 时间，不要使用固定时间戳或占位符。
+   - **重要**：尽量申请保留 `link` 字段，即使是 Easy Apply 也要记录岗位链接，方便后续查看和追踪。
 
 4. **表单填写**：
    - 读取 `info/config.json` 中的 `applicationFormAnswers.fieldMappings` 来匹配表单问题
