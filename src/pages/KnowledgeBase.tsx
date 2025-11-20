@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Edit2, Save, X, Plus, Trash2 } from 'lucide-react'
+import { Edit2, Save, X, Plus, Trash2, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface KnowledgeEntry {
   question: string
   assumedAnswer?: string
   answer?: string
   timestamp: string
+  updatedAt?: string
 }
 
 const API_BASE_URL = '/api'
@@ -22,6 +23,9 @@ export default function KnowledgeBase() {
   const [newAnswer, setNewAnswer] = useState<{ [key: number]: string }>({})
   const [isCreatingNew, setIsCreatingNew] = useState(false)
   const [newKnowledge, setNewKnowledge] = useState<{ question: string; answer: string }>({ question: '', answer: '' })
+  const [currentPage, setCurrentPage] = useState(1)
+  
+  const ITEMS_PER_PAGE = 10
 
   useEffect(() => {
     fetchQuestions()
@@ -50,10 +54,12 @@ export default function KnowledgeBase() {
 
     try {
       const updatedQuestions = [...questions]
+      const now = new Date().toISOString()
       updatedQuestions[index] = {
         ...updatedQuestions[index],
         answer: answer,
-        timestamp: updatedQuestions[index].timestamp || new Date().toISOString()
+        updatedAt: now,
+        timestamp: updatedQuestions[index].timestamp || now
       }
 
       const response = await fetch(`${API_BASE_URL}/unknown`, {
@@ -90,10 +96,14 @@ export default function KnowledgeBase() {
 
     try {
       const updatedQuestions = [...questions]
+      const now = new Date().toISOString()
       updatedQuestions[editingIndex] = {
         ...updatedQuestions[editingIndex],
         question: editForm.question,
         answer: editForm.answer,
+        updatedAt: now,
+        // Also update timestamp if it doesn't exist (for backward compatibility)
+        timestamp: updatedQuestions[editingIndex].timestamp || now,
       }
 
       const response = await fetch(`${API_BASE_URL}/unknown`, {
@@ -108,6 +118,7 @@ export default function KnowledgeBase() {
         setQuestions(updatedQuestions)
         setEditingIndex(null)
         setEditForm({ question: '', answer: '' })
+        setCurrentPage(1) // Reset to first page after edit
       } else {
         throw new Error('Failed to update question')
       }
@@ -188,6 +199,7 @@ export default function KnowledgeBase() {
         setQuestions(updatedQuestions)
         setEditingIndex(null)
         setEditForm({ question: '', answer: '' })
+        setCurrentPage(1) // Reset to first page after delete
       } else {
         throw new Error('Failed to delete entry')
       }
@@ -212,8 +224,21 @@ export default function KnowledgeBase() {
     }
   }
 
-  const unansweredQuestions = questions.filter(q => !q.answer)
-  const answeredQuestions = questions.filter(q => q.answer)
+  const unansweredQuestions = questions
+    .filter(q => !q.answer)
+    .sort((a, b) => {
+      const timeA = new Date(a.timestamp).getTime()
+      const timeB = new Date(b.timestamp).getTime()
+      return timeB - timeA // Newest first
+    })
+  
+  const answeredQuestions = questions
+    .filter(q => q.answer)
+    .sort((a, b) => {
+      const timeA = new Date(a.updatedAt || a.timestamp).getTime()
+      const timeB = new Date(b.updatedAt || b.timestamp).getTime()
+      return timeB - timeA // Newest first
+    })
 
   // Auto-switch to answered tab if unanswered is empty and answered has items
   useEffect(() => {
@@ -315,34 +340,19 @@ export default function KnowledgeBase() {
                           key={`${question.timestamp}-${index}`}
                           className="p-4 border border-gray-200 dark:border-stone-700 rounded-lg bg-white dark:bg-stone-800"
                         >
-                          <div className="mb-3">
-                            <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                              {formatDate(question.timestamp)}
-                            </div>
-                            <div className="font-medium text-gray-900 dark:text-white mb-2">
-                              {question.question}
-                            </div>
-                            {question.assumedAnswer && (
-                              <div className="text-sm text-gray-600 dark:text-gray-400 italic mb-2">
-                                Assumed Answer: {question.assumedAnswer}
+                          <div className="mb-3 flex items-start gap-4">
+                            <div className="flex-1">
+                              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                                {formatDate(question.timestamp)}
                               </div>
-                            )}
-                          </div>
-                          <div className="flex gap-2">
-                            <textarea
-                              value={newAnswer[originalIndex] || ''}
-                              onChange={(e) =>
-                                setNewAnswer({ ...newAnswer, [originalIndex]: e.target.value })
-                              }
-                              placeholder="Enter your answer..."
-                              className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-stone-600 rounded-lg bg-white dark:bg-stone-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                              rows={3}
-                            />
-                            <div className="flex flex-col gap-2">
+                              <div className="font-medium text-gray-900 dark:text-white">
+                                {question.question}
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
                               <Button
                                 onClick={() => handleSaveAnswer(originalIndex)}
                                 size="sm"
-                                className="self-start"
                               >
                                 <Save className="h-4 w-4 mr-1" />
                                 Save
@@ -351,11 +361,22 @@ export default function KnowledgeBase() {
                                 onClick={() => handleDelete(originalIndex)}
                                 variant="ghost"
                                 size="sm"
-                                className="self-start text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+                                className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                               >
                                 <Trash2 className="h-4 w-4" />
                               </Button>
                             </div>
+                          </div>
+                          <div>
+                            <textarea
+                              value={newAnswer[originalIndex] || ''}
+                              onChange={(e) =>
+                                setNewAnswer({ ...newAnswer, [originalIndex]: e.target.value })
+                              }
+                              placeholder={question.assumedAnswer ? `Assumed answer: ${question.assumedAnswer}` : "Enter your answer..."}
+                              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-stone-600 rounded-lg bg-white dark:bg-stone-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                              rows={3}
+                            />
                           </div>
                         </div>
                       )
@@ -371,7 +392,7 @@ export default function KnowledgeBase() {
               <CardHeader className="bg-gradient-to-r from-green-50/50 to-white dark:from-green-900/20 dark:to-stone-800/50 border-b border-gray-200 dark:border-stone-700">
                 <CardTitle className="text-xl font-semibold">Memory</CardTitle>
                 <CardDescription>
-                  Your memory of questions and answers. Click the edit button to modify them.
+                  Tell AI how you want it to answer questions. AI will use these memories to fill out applications.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-6">
@@ -431,8 +452,17 @@ export default function KnowledgeBase() {
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-4">
-                    {answeredQuestions.map((question, index) => {
+                  <>
+                    {(() => {
+                      const totalPages = Math.ceil(answeredQuestions.length / ITEMS_PER_PAGE)
+                      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+                      const endIndex = startIndex + ITEMS_PER_PAGE
+                      const paginatedQuestions = answeredQuestions.slice(startIndex, endIndex)
+                      
+                      return (
+                        <>
+                          <div className="space-y-4">
+                            {paginatedQuestions.map((question, index) => {
                       // Find original index using timestamp and question combination
                       const originalIndex = questions.findIndex(
                         q => q.timestamp === question.timestamp && q.question === question.question
@@ -501,7 +531,7 @@ export default function KnowledgeBase() {
                               <div className="flex items-start justify-between mb-2">
                                 <div className="flex-1">
                                   <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                                    {formatDate(question.timestamp)}
+                                    {formatDate(question.updatedAt || question.timestamp)}
                                   </div>
                                   <div className="font-medium text-gray-900 dark:text-white mb-2">
                                     {question.question}
@@ -518,14 +548,6 @@ export default function KnowledgeBase() {
                                   >
                                     <Edit2 className="h-4 w-4" />
                                   </Button>
-                                  <Button
-                                    onClick={() => handleDelete(originalIndex)}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
-                                  >
-                                    <Trash2 className="h-4 w-4" />
-                                  </Button>
                                 </div>
                               </div>
                             </>
@@ -533,7 +555,37 @@ export default function KnowledgeBase() {
                         </div>
                       )
                     })}
-                  </div>
+                          </div>
+                          {/* Pagination */}
+                          {totalPages > 1 && (
+                            <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-200 dark:border-stone-700">
+                              <div className="text-sm text-gray-500 dark:text-gray-400">
+                                Page {currentPage} of {totalPages}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                  disabled={currentPage === 1}
+                                  className="px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-stone-800 border border-gray-300 dark:border-stone-600 rounded-lg hover:bg-gray-50 dark:hover:bg-stone-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
+                                >
+                                  <ChevronLeft className="h-4 w-4" />
+                                  Previous
+                                </button>
+                                <button
+                                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                  disabled={currentPage === totalPages}
+                                  className="px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-stone-800 border border-gray-300 dark:border-stone-600 rounded-lg hover:bg-gray-50 dark:hover:bg-stone-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
+                                >
+                                  Next
+                                  <ChevronRight className="h-4 w-4" />
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )
+                    })()}
+                  </>
                 )}
               </CardContent>
             </Card>
