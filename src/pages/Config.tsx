@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Upload, FileText, X, Info, Plus, Trash2, Save, HelpCircle, Edit2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Upload, FileText, X, Info, Plus, Trash2, Save, HelpCircle, Edit2, ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react'
 import { Switch } from '@/components/ui/switch'
 
 interface ResumeFile {
@@ -322,6 +322,37 @@ export default function Config() {
     }
   }
 
+  const handleMoveFilter = async (filterId: string, direction: 'up' | 'down') => {
+    const index = jobFilters.findIndex(f => f.id === filterId)
+    if (index === -1) return
+
+    const newIndex = direction === 'up' ? index - 1 : index + 1
+    if (newIndex < 0 || newIndex >= jobFilters.length) return
+
+    const updatedFilters = [...jobFilters]
+    const [movedFilter] = updatedFilters.splice(index, 1)
+    updatedFilters.splice(newIndex, 0, movedFilter)
+    setJobFilters(updatedFilters)
+
+    try {
+      const response = await fetch('/api/job-filters', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filters: updatedFilters }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to reorder filter')
+      }
+    } catch (error) {
+      console.error('Failed to reorder filter:', error)
+      alert('Failed to reorder filter. Please try again.')
+      fetchJobFilters()
+    }
+  }
+
   const handleCreateFilter = async () => {
     if (!newFilter.name || !newFilter.type || !newFilter.aiExplanation) {
       alert('Please fill in name, type, and AI explanation')
@@ -418,16 +449,61 @@ export default function Config() {
         const listValue = Array.isArray(filter.value) ? filter.value : []
         return (
           <div className="space-y-2">
-            <textarea
-              value={listValue.join('\n')}
-              onChange={(e) => {
-                const values = e.target.value.split('\n').filter(v => v.trim())
-                handleFilterChange(filter.id, values)
-              }}
-              placeholder={filter.placeholder || 'Enter items, one per line'}
-              rows={6}
-              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-stone-600 rounded-lg bg-white dark:bg-stone-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none font-mono"
-            />
+            {/* List items */}
+            <div className="space-y-1">
+              {listValue.map((item, index) => (
+                <div key={index} className="flex items-center gap-2 group">
+                  <input
+                    type="text"
+                    value={item}
+                    onChange={(e) => {
+                      const newValues = [...listValue]
+                      newValues[index] = e.target.value
+                      handleFilterChange(filter.id, newValues)
+                    }}
+                    className="flex-1 px-3 py-1.5 text-sm border border-gray-300 dark:border-stone-600 rounded-lg bg-white dark:bg-stone-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newValues = listValue.filter((_, i) => i !== index)
+                      handleFilterChange(filter.id, newValues)
+                    }}
+                    className="p-1.5 text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+            {/* Add new item */}
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                placeholder={filter.placeholder || 'Add new item...'}
+                className="flex-1 px-3 py-1.5 text-sm border border-dashed border-gray-300 dark:border-stone-600 rounded-lg bg-gray-50 dark:bg-stone-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-solid focus:bg-white dark:focus:bg-stone-800"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim()) {
+                    const newValue = (e.target as HTMLInputElement).value.trim()
+                    handleFilterChange(filter.id, [...listValue, newValue])
+                    ;(e.target as HTMLInputElement).value = ''
+                  }
+                }}
+              />
+              <button
+                type="button"
+                onClick={(e) => {
+                  const input = (e.target as HTMLElement).parentElement?.querySelector('input')
+                  if (input && input.value.trim()) {
+                    handleFilterChange(filter.id, [...listValue, input.value.trim()])
+                    input.value = ''
+                  }
+                }}
+                className="p-1.5 text-gray-400 hover:text-blue-500 dark:text-gray-500 dark:hover:text-blue-400"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
             {listValue.length > 0 && (
               <div className="text-xs text-gray-500 dark:text-gray-400">
                 {listValue.length} item{listValue.length !== 1 ? 's' : ''} in list
@@ -785,9 +861,12 @@ export default function Config() {
                       
                       return (
                         <>
-                          {paginatedFilters.map((filter) => {
+                          {paginatedFilters.map((filter, paginatedIndex) => {
                     const isEditing = editingFilterId === filter.id
                     const isEnabled = filter.enabled ?? true
+                    const actualIndex = startIndex + paginatedIndex
+                    const isFirst = actualIndex === 0
+                    const isLast = actualIndex === jobFilters.length - 1
 
                     return (
                       <div
@@ -910,7 +989,23 @@ export default function Config() {
                                   </div>
                                 </div>
                               </div>
-                              <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-1">
+                                <div className="flex flex-col">
+                                  <button
+                                    onClick={() => handleMoveFilter(filter.id, 'up')}
+                                    disabled={isFirst}
+                                    className="p-0.5 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
+                                  >
+                                    <ChevronUp className="h-4 w-4" />
+                                  </button>
+                                  <button
+                                    onClick={() => handleMoveFilter(filter.id, 'down')}
+                                    disabled={isLast}
+                                    className="p-0.5 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
+                                  >
+                                    <ChevronDown className="h-4 w-4" />
+                                  </button>
+                                </div>
                                 <Button
                                   onClick={() => handleStartEdit(filter)}
                                   variant="ghost"
