@@ -8,6 +8,7 @@ import Applications from './pages/Applications'
 import KnowledgeBase from './pages/KnowledgeBase'
 import Prompts from './pages/Prompts'
 import Logs from './pages/Logs'
+import Monitor from './pages/Monitor'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/scheduler" element={<Scheduler />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/applications" element={<Applications />} />
+        <Route path="/monitor" element={<Monitor />} />
         <Route path="/unknown-questions" element={<KnowledgeBase />} />
         <Route path="/prompts" element={<Prompts />} />
         <Route path="/logs" element={<Logs />} />

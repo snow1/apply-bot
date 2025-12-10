@@ -81,7 +81,7 @@
       "type": "number",
       "description": "Minimum acceptable salary",
       "aiExplanation": "Skip job postings where the salary range is below this amount. If no salary is mentioned, you may still apply but note the missing salary information. Use the currency specified in the salary-currency filter. For salary ranges, check if the minimum of the range meets this requirement.",
-      "value": 80000,
+      "value": 74998,
       "min": 0,
       "max": 1000000,
       "currency": "CAD",
@@ -185,7 +185,6 @@
       "aiExplanation": "Only apply to jobs at these levels. Match job titles and descriptions for level indicators like 'Junior', 'Mid-level', 'Senior', 'Lead', 'Principal', 'Staff', etc.",
       "value": [
         "mid-level",
-        "senior",
         "junior",
         "intern"
       ],

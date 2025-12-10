@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express()
-const DEFAULT_PORT = 3001
+const DEFAULT_PORT = 3010
 
 // Check if a port is available
 function isPortAvailable(port) {
@@ -43,6 +43,7 @@ const appliedJsonPath = path.join(__dirname, 'data', 'applied.json')
 const promptsJsonPath = path.join(__dirname, 'data', 'prompts.json')
 const jobFiltersJsonPath = path.join(__dirname, 'data', 'job-filters.json')
 const logsJsonPath = path.join(__dirname, 'data', 'logs.json')
+const monitoredCompaniesJsonPath = path.join(__dirname, 'data', 'monitored-companies.json')
 const dataDir = path.join(__dirname, 'data')
 
 // Ensure data directory exists
@@ -516,6 +517,39 @@ app.delete('/api/logs/:sessionId', (req, res) => {
   } catch (error) {
     console.error('Error deleting log session:', error)
     res.status(500).json({ error: 'Failed to delete log session' })
+  }
+})
+
+// Monitored Companies API
+// Get all monitored companies
+app.get('/api/monitored-companies', (req, res) => {
+  try {
+    if (!fs.existsSync(monitoredCompaniesJsonPath)) {
+      return res.json({ companies: [] })
+    }
+    const data = fs.readFileSync(monitoredCompaniesJsonPath, 'utf-8')
+    const json = data.trim() ? JSON.parse(data) : { companies: [] }
+    res.json(json)
+  } catch (error) {
+    console.error('Error reading monitored-companies.json:', error)
+    res.status(500).json({ error: 'Failed to read monitored-companies.json' })
+  }
+})
+
+// Update monitored companies
+app.post('/api/monitored-companies', (req, res) => {
+  try {
+    const { companies } = req.body
+
+    if (!Array.isArray(companies)) {
+      return res.status(400).json({ error: 'Invalid data format' })
+    }
+
+    fs.writeFileSync(monitoredCompaniesJsonPath, JSON.stringify({ companies }, null, 2), 'utf-8')
+    res.json({ success: true })
+  } catch (error) {
+    console.error('Error writing monitored-companies.json:', error)
+    res.status(500).json({ error: 'Failed to write monitored-companies.json' })
   }
 })
 
