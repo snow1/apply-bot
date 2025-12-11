@@ -96,11 +96,18 @@ export default function Applications() {
       
       // Then sort by Posted time if sort is set
       if (postedSort !== null) {
-        // Parse postedTime to get approximate timestamp
+        // Parse postedTime to get timestamp
         const parsePostedTime = (postedTime: string): number => {
+          // Try to parse as ISO timestamp first
+          const timestamp = Date.parse(postedTime)
+          if (!isNaN(timestamp)) {
+            return timestamp
+          }
+
+          // Fallback: parse old format "X hours ago" or "X days ago"
           const hoursMatch = postedTime.match(/(\d+)\s*hours?\s*ago/i)
           const daysMatch = postedTime.match(/(\d+)\s*days?\s*ago/i)
-          
+
           if (hoursMatch) {
             const hours = parseInt(hoursMatch[1])
             return Date.now() - hours * 60 * 60 * 1000
@@ -110,7 +117,7 @@ export default function Applications() {
           }
           return 0
         }
-        
+
         const timeA = parsePostedTime(a.postedTime)
         const timeB = parsePostedTime(b.postedTime)
         const result = postedSort === 'desc' ? timeB - timeA : timeA - timeB
@@ -170,10 +177,28 @@ export default function Applications() {
   }
 
   const formatPostedTime = (postedTime: string) => {
-    // Parse postedTime (e.g., "10 hours ago", "2 days ago", "38 hours ago")
+    // Try to parse as ISO timestamp first
+    const timestamp = Date.parse(postedTime)
+    if (!isNaN(timestamp)) {
+      const now = Date.now()
+      const diff = now - timestamp
+      const hours = Math.floor(diff / (1000 * 60 * 60))
+      const days = Math.floor(hours / 24)
+
+      if (hours < 1) {
+        const minutes = Math.floor(diff / (1000 * 60))
+        return minutes <= 1 ? '1 minute ago' : `${minutes} minutes ago`
+      } else if (hours < 24) {
+        return hours === 1 ? '1 hour ago' : `${hours} hours ago`
+      } else {
+        return days === 1 ? '1 day ago' : `${days} days ago`
+      }
+    }
+
+    // Fallback: try to parse old format "X hours ago"
     const hoursMatch = postedTime.match(/(\d+)\s*hours?\s*ago/i)
     const daysMatch = postedTime.match(/(\d+)\s*days?\s*ago/i)
-    
+
     if (hoursMatch) {
       const hours = parseInt(hoursMatch[1])
       if (hours < 24) {
@@ -186,8 +211,8 @@ export default function Applications() {
       const days = parseInt(daysMatch[1])
       return `${days} day${days !== 1 ? 's' : ''} ago`
     }
-    
-    // Fallback to original postedTime if we can't parse it
+
+    // Last resort: return original string
     return postedTime
   }
 

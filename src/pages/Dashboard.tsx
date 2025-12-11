@@ -122,31 +122,35 @@ export default function Dashboard() {
 
   const appStats = getApplicationStats()
 
-  // Calculate month-over-month growth
+  // Calculate rolling 30-day growth (current 30 days vs previous 30 days)
   const getMonthGrowth = () => {
     if (applications.length === 0) return null
 
     const now = new Date()
-    const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1)
-    const currentMonthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999)
-    
-    const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1)
-    const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999)
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
-    const currentMonthCount = applications.filter(app => {
+    // Current period: last 30 days
+    const currentPeriodStart = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000)
+    const currentPeriodEnd = today
+
+    // Previous period: 30-60 days ago
+    const previousPeriodStart = new Date(today.getTime() - 60 * 24 * 60 * 60 * 1000)
+    const previousPeriodEnd = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000)
+
+    const currentPeriodCount = applications.filter(app => {
       const appDate = new Date(app.applicationTime)
-      return appDate >= currentMonthStart && appDate <= currentMonthEnd
+      return appDate >= currentPeriodStart && appDate <= currentPeriodEnd
     }).length
 
-    const lastMonthCount = applications.filter(app => {
+    const previousPeriodCount = applications.filter(app => {
       const appDate = new Date(app.applicationTime)
-      return appDate >= lastMonthStart && appDate <= lastMonthEnd
+      return appDate >= previousPeriodStart && appDate < previousPeriodEnd
     }).length
 
-    // If no data for last month, don't show the indicator
-    if (lastMonthCount === 0) return null
+    // If no data for previous period, don't show the indicator
+    if (previousPeriodCount === 0) return null
 
-    const growth = ((currentMonthCount - lastMonthCount) / lastMonthCount) * 100
+    const growth = ((currentPeriodCount - previousPeriodCount) / previousPeriodCount) * 100
     return {
       percentage: growth,
       isPositive: growth >= 0,
@@ -235,7 +239,7 @@ export default function Dashboard() {
                     ? 'text-green-700 dark:text-green-300'
                     : 'text-red-700 dark:text-red-300'
                 }`}>
-                  {monthGrowth.isPositive ? '+' : ''}{monthGrowth.percentage.toFixed(1)}% this month
+                  {monthGrowth.isPositive ? '+' : ''}{monthGrowth.percentage.toFixed(1)}% vs prev 30 days
                 </span>
               </div>
             )}

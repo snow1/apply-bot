@@ -1,282 +1,242 @@
 [
   {
-    "company": "QUANTEAM (RAINBOW PARTNERS Group)",
-    "jobTitle": "MONTREAL [hybrid] - Python / React Developer",
-    "postedTime": "7 hours ago",
-    "applicationTime": "2025-12-03T04:56:39Z",
-    "status": "applied",
-    "link": "https://www.linkedin.com/jobs/view/4348273314/"
-  },
-  {
-    "company": "emtelligent",
-    "jobTitle": "Customer Solutions Data Scientist",
-    "postedTime": "16 minutes ago",
-    "applicationTime": "2025-11-22T03:10:37Z",
-    "status": "applied",
-    "link": "https://www.linkedin.com/jobs/view/4324220228/"
-  },
-  {
-    "company": "Tek Tron IT",
-    "jobTitle": "Data Engineer",
-    "postedTime": "29 minutes ago",
-    "applicationTime": "2025-11-21T18:56:21Z",
-    "status": "applied",
-    "link": "https://www.linkedin.com/jobs/view/4337647153/"
-  },
-  {
-    "company": "CCI- Computer Consultants International, Inc.",
-    "jobTitle": "Intermediate Java Test Automation Developer",
-    "postedTime": "13 minutes ago",
-    "applicationTime": "2025-11-21T18:49:48Z",
-    "status": "applied",
-    "link": "https://www.linkedin.com/jobs/view/4338386541/"
-  },
-  {
-    "company": "Red Oak Technologies",
-    "jobTitle": "Edge to Cloud Developer",
-    "postedTime": "9 minutes ago",
-    "applicationTime": "2025-11-21T18:46:29Z",
-    "status": "applied",
-    "link": "https://www.linkedin.com/jobs/view/4323770194/"
-  },
-  {
     "company": "Tesla",
     "jobTitle": "Cloud Engineer",
-    "postedTime": "10 hours ago",
-    "applicationTime": "2025-11-19T10:40:59.305Z"
+    "postedTime": "2025-12-04T00:40:59.305Z",
+    "applicationTime": "2025-12-04T10:40:59.305Z"
   },
   {
     "company": "IBM",
     "jobTitle": "Cloud Engineer",
-    "postedTime": "16 hours ago",
-    "applicationTime": "2025-11-19T04:36:49.816Z"
+    "postedTime": "2025-12-03T12:36:49.816Z",
+    "applicationTime": "2025-12-04T04:36:49.816Z"
   },
   {
     "company": "Adobe",
     "jobTitle": "iOS Engineer",
-    "postedTime": "38 hours ago",
-    "applicationTime": "2025-11-18T06:19:37.020Z"
+    "postedTime": "2025-12-01T16:19:37.020Z",
+    "applicationTime": "2025-12-03T06:19:37.020Z"
   },
   {
     "company": "Apple",
     "jobTitle": "Senior Software Engineer",
-    "postedTime": "74 hours ago",
-    "applicationTime": "2025-11-16T18:59:29.820Z"
+    "postedTime": "2025-11-28T16:59:29.820Z",
+    "applicationTime": "2025-12-01T18:59:29.820Z"
   },
   {
     "company": "Slack",
     "jobTitle": "Android Engineer",
-    "postedTime": "90 hours ago",
-    "applicationTime": "2025-11-16T02:09:34.387Z"
+    "postedTime": "2025-11-27T08:09:34.387Z",
+    "applicationTime": "2025-12-01T02:09:34.387Z"
   },
   {
     "company": "Cisco",
     "jobTitle": "Software Engineer",
-    "postedTime": "100 hours ago",
-    "applicationTime": "2025-11-15T16:10:15.638Z"
+    "postedTime": "2025-11-26T12:10:15.638Z",
+    "applicationTime": "2025-11-30T16:10:15.638Z"
   },
   {
     "company": "Atlassian",
     "jobTitle": "Senior Software Engineer",
-    "postedTime": "164 hours ago",
-    "applicationTime": "2025-11-13T00:46:41.763Z"
+    "postedTime": "2025-11-21T04:46:41.763Z",
+    "applicationTime": "2025-11-28T00:46:41.763Z"
   },
   {
     "company": "Nvidia",
     "jobTitle": "Security Engineer",
-    "postedTime": "174 hours ago",
-    "applicationTime": "2025-11-12T14:16:54.040Z"
+    "postedTime": "2025-11-20T08:16:54.040Z",
+    "applicationTime": "2025-11-27T14:16:54.040Z"
   },
   {
     "company": "Twilio",
     "jobTitle": "Software Engineer",
-    "postedTime": "176 hours ago",
-    "applicationTime": "2025-11-12T12:29:57.129Z"
+    "postedTime": "2025-11-20T04:29:57.129Z",
+    "applicationTime": "2025-11-27T12:29:57.129Z"
   },
   {
     "company": "MongoDB",
     "jobTitle": "Backend Engineer",
-    "postedTime": "180 hours ago",
-    "applicationTime": "2025-11-12T08:28:51.751Z"
+    "postedTime": "2025-11-19T20:28:51.751Z",
+    "applicationTime": "2025-11-27T08:28:51.751Z"
   },
   {
     "company": "Meta",
     "jobTitle": "DevOps Engineer",
-    "postedTime": "194 hours ago",
-    "applicationTime": "2025-11-11T18:09:53.045Z"
+    "postedTime": "2025-11-18T16:09:53.045Z",
+    "applicationTime": "2025-11-26T18:09:53.045Z"
   },
   {
     "company": "Stripe",
     "jobTitle": "Senior Software Engineer",
-    "postedTime": "201 hours ago",
-    "applicationTime": "2025-11-11T11:54:34.133Z"
+    "postedTime": "2025-11-18T02:54:34.133Z",
+    "applicationTime": "2025-11-26T11:54:34.133Z"
   },
   {
     "company": "MongoDB",
     "jobTitle": "Android Engineer",
-    "postedTime": "205 hours ago",
-    "applicationTime": "2025-11-11T07:16:32.579Z"
+    "postedTime": "2025-11-17T18:16:32.579Z",
+    "applicationTime": "2025-11-26T07:16:32.579Z"
   },
   {
     "company": "MongoDB",
     "jobTitle": "Mobile Engineer",
-    "postedTime": "274 hours ago",
-    "applicationTime": "2025-11-08T10:14:25.376Z"
+    "postedTime": "2025-11-12T00:14:25.376Z",
+    "applicationTime": "2025-11-23T10:14:25.376Z"
   },
   {
     "company": "Cisco",
     "jobTitle": "Platform Engineer",
-    "postedTime": "280 hours ago",
-    "applicationTime": "2025-11-08T04:12:20.969Z"
+    "postedTime": "2025-11-11T12:12:20.969Z",
+    "applicationTime": "2025-11-23T04:12:20.969Z"
   },
   {
     "company": "Stripe",
     "jobTitle": "Backend Engineer",
-    "postedTime": "281 hours ago",
-    "applicationTime": "2025-11-08T03:32:32.697Z"
+    "postedTime": "2025-11-11T10:32:32.697Z",
+    "applicationTime": "2025-11-23T03:32:32.697Z"
   },
   {
     "company": "MongoDB",
     "jobTitle": "Frontend Engineer",
-    "postedTime": "307 hours ago",
-    "applicationTime": "2025-11-07T01:19:23.630Z"
+    "postedTime": "2025-11-09T06:19:23.630Z",
+    "applicationTime": "2025-11-22T01:19:23.630Z"
   },
   {
     "company": "Apple",
     "jobTitle": "Senior Software Engineer",
-    "postedTime": "343 hours ago",
-    "applicationTime": "2025-11-05T13:10:37.824Z"
+    "postedTime": "2025-11-06T06:10:37.824Z",
+    "applicationTime": "2025-11-20T13:10:37.824Z"
   },
   {
     "company": "Oracle",
     "jobTitle": "Platform Engineer",
-    "postedTime": "344 hours ago",
-    "applicationTime": "2025-11-05T12:52:04.403Z"
+    "postedTime": "2025-11-06T04:52:04.403Z",
+    "applicationTime": "2025-11-20T12:52:04.403Z"
   },
   {
     "company": "Nvidia",
     "jobTitle": "Senior Software Engineer",
-    "postedTime": "373 hours ago",
-    "applicationTime": "2025-11-04T07:25:00.691Z"
+    "postedTime": "2025-11-03T18:25:00.691Z",
+    "applicationTime": "2025-11-19T07:25:00.691Z"
   },
   {
     "company": "Tesla",
     "jobTitle": "Android Engineer",
-    "postedTime": "397 hours ago",
-    "applicationTime": "2025-11-03T07:44:50.197Z"
+    "postedTime": "2025-11-01T18:44:50.197Z",
+    "applicationTime": "2025-11-18T07:44:50.197Z"
   },
   {
     "company": "Zoom",
     "jobTitle": "Platform Engineer",
-    "postedTime": "407 hours ago",
-    "applicationTime": "2025-11-02T21:32:36.649Z"
+    "postedTime": "2025-10-31T22:32:36.649Z",
+    "applicationTime": "2025-11-17T21:32:36.649Z"
   },
   {
     "company": "Microsoft",
     "jobTitle": "Platform Engineer",
-    "postedTime": "425 hours ago",
-    "applicationTime": "2025-11-02T04:01:45.213Z"
+    "postedTime": "2025-10-30T11:01:45.213Z",
+    "applicationTime": "2025-11-17T04:01:45.213Z"
   },
   {
     "company": "Shopify",
     "jobTitle": "Backend Engineer",
-    "postedTime": "484 hours ago",
-    "applicationTime": "2025-10-30T16:29:42.828Z"
+    "postedTime": "2025-10-25T12:29:42.828Z",
+    "applicationTime": "2025-11-14T16:29:42.828Z"
   },
   {
     "company": "Microsoft",
     "jobTitle": "Full Stack Engineer",
-    "postedTime": "521 hours ago",
-    "applicationTime": "2025-10-29T04:04:06.031Z"
+    "postedTime": "2025-10-22T11:04:06.031Z",
+    "applicationTime": "2025-11-13T04:04:06.031Z"
   },
   {
     "company": "IBM",
     "jobTitle": "iOS Engineer",
-    "postedTime": "623 hours ago",
-    "applicationTime": "2025-10-24T21:53:19.405Z"
+    "postedTime": "2025-10-13T22:53:19.405Z",
+    "applicationTime": "2025-11-08T21:53:19.405Z"
   },
   {
     "company": "Cisco",
     "jobTitle": "Mobile Engineer",
-    "postedTime": "689 hours ago",
-    "applicationTime": "2025-10-22T03:11:18.112Z"
+    "postedTime": "2025-10-08T10:11:18.112Z",
+    "applicationTime": "2025-11-06T03:11:18.112Z"
   },
   {
     "company": "Shopify",
     "jobTitle": "Backend Engineer",
-    "postedTime": "728 hours ago",
-    "applicationTime": "2025-10-20T12:05:47.611Z"
+    "postedTime": "2025-10-05T04:05:47.611Z",
+    "applicationTime": "2025-11-04T12:05:47.611Z"
   },
   {
     "company": "Snowflake",
     "jobTitle": "Cloud Engineer",
-    "postedTime": "810 hours ago",
-    "applicationTime": "2025-10-17T02:16:49.808Z"
+    "postedTime": "2025-09-28T08:16:49.808Z",
+    "applicationTime": "2025-11-01T02:16:49.808Z"
   },
   {
     "company": "Cisco",
     "jobTitle": "Backend Engineer",
-    "postedTime": "850 hours ago",
-    "applicationTime": "2025-10-15T11:00:36.058Z"
+    "postedTime": "2025-09-25T01:00:36.058Z",
+    "applicationTime": "2025-10-30T11:00:36.058Z"
   },
   {
     "company": "Amazon",
     "jobTitle": "Site Reliability Engineer",
-    "postedTime": "859 hours ago",
-    "applicationTime": "2025-10-15T01:53:23.681Z"
+    "postedTime": "2025-09-24T06:53:23.681Z",
+    "applicationTime": "2025-10-30T01:53:23.681Z"
   },
   {
     "company": "Intel",
     "jobTitle": "Security Engineer",
-    "postedTime": "866 hours ago",
-    "applicationTime": "2025-10-14T19:03:20.055Z"
+    "postedTime": "2025-09-23T17:03:20.055Z",
+    "applicationTime": "2025-10-29T19:03:20.055Z"
   },
   {
     "company": "Salesforce",
     "jobTitle": "Software Engineer",
-    "postedTime": "914 hours ago",
-    "applicationTime": "2025-10-12T18:17:02.532Z"
+    "postedTime": "2025-09-19T16:17:02.532Z",
+    "applicationTime": "2025-10-27T18:17:02.532Z"
   },
   {
     "company": "Stripe",
     "jobTitle": "ML Engineer",
-    "postedTime": "969 hours ago",
-    "applicationTime": "2025-10-10T11:33:51.895Z"
+    "postedTime": "2025-09-15T02:33:51.895Z",
+    "applicationTime": "2025-10-25T11:33:51.895Z"
   },
   {
     "company": "Dropbox",
     "jobTitle": "Platform Engineer",
-    "postedTime": "993 hours ago",
-    "applicationTime": "2025-10-09T11:57:51.556Z"
+    "postedTime": "2025-09-13T02:57:51.556Z",
+    "applicationTime": "2025-10-24T11:57:51.556Z"
   },
   {
     "company": "Atlassian",
     "jobTitle": "Site Reliability Engineer",
-    "postedTime": "1003 hours ago",
-    "applicationTime": "2025-10-09T02:04:21.545Z"
+    "postedTime": "2025-09-12T07:04:21.545Z",
+    "applicationTime": "2025-10-24T02:04:21.545Z"
   },
   {
     "company": "Stripe",
     "jobTitle": "Android Engineer",
-    "postedTime": "1024 hours ago",
-    "applicationTime": "2025-10-08T04:53:26.691Z"
+    "postedTime": "2025-09-10T12:53:26.691Z",
+    "applicationTime": "2025-10-23T04:53:26.691Z"
   },
   {
     "company": "Meta",
     "jobTitle": "Security Engineer",
-    "postedTime": "1057 hours ago",
-    "applicationTime": "2025-10-06T19:36:35.966Z"
+    "postedTime": "2025-09-07T18:36:35.966Z",
+    "applicationTime": "2025-10-21T19:36:35.966Z"
   },
   {
     "company": "MongoDB",
     "jobTitle": "Platform Engineer",
-    "postedTime": "1128 hours ago",
-    "applicationTime": "2025-10-03T20:36:50.949Z"
+    "postedTime": "2025-09-01T20:36:50.949Z",
+    "applicationTime": "2025-10-18T20:36:50.949Z"
   },
   {
     "company": "Dropbox",
     "jobTitle": "DevOps Engineer",
-    "postedTime": "1145 hours ago",
-    "applicationTime": "2025-10-03T03:15:24.049Z"
+    "postedTime": "2025-08-31T10:15:24.049Z",
+    "applicationTime": "2025-10-18T03:15:24.049Z"
   }
 ]
